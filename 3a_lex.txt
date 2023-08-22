@@ -1,0 +1,30 @@
+%{
+    #include <stdio.h>
+    #include <stdlib.h>
+    extern FILE *yyin, *yyout;
+    int single = 0, multi = 0;
+%}
+
+%%
+"//".*\n	{single++; }
+"/*"[^*/]*"*/"	{multi++; }
+[a-zA-Z0-9]+[\n] {;fprintf(yyout, "%s", yytext);}
+%%
+
+int ywrap()
+{
+   return 1;
+}
+
+int main()
+{
+    yyin = fopen("foo.txt", "r");
+    yyout = fopen("bar.txt", "w");
+    yylex();
+    printf("Number of single line comments = %d\n", single);
+    printf("Number of multi line comments = %d\n", multi);
+      fclose(yyin);
+    fclose(yyout);
+    return 0;
+}
+    

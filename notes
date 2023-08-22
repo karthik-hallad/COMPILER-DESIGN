@@ -1,0 +1,136 @@
+https://www.youtube.com/watch?v=rhzKDrUiJVk&t=1103s
+https://www.youtube.com/watch?v=54bo1qaHAfk&t=1471s
+https://www.youtube.com/watch?v=__-wUHG2rfM&t=601s
+https://www.youtube.com/watch?v=LpVufkH4gog&t=885s
+https://www.youtube.com/watch?v=fFRxWtRibC8&t=1424s
+
+regex:
+e+ -> 1 or more
+ea? -> 0 or 1 but for only a
+. -> anything except new line
+\. -> cancel out anything that comes after this
+\w \s \d -> words spaces numbres (if /D then not a digit)
+\w{3,5} -> 3 to 5 words
+[fc] -> match any one of the chars
+[a-zA-z0-9] -> anything in that range
+(tab)? -> one or zero tab
+(t|T){2,3} -> 2-3 of t or T
+"."-> actual dot (same as \.)
+^.$ -> begin/end of the statement(entire)
+
+😘️lex
+
+%{
+	decalrations
+%}
+%%
+//can print also in brackets
+%%
+int main(){yylex();}
+follows the order in which we write statements
+for keywords just do : if | else if | .....................dah
+yytext = prints the text actually matched
+yyleng = gives length of cnt
+dog.*cat -> gives starting with dog and ending with cat as we always try to comeplete the st
+if we just write ; then it gets returned
+
+
+😊️yacc
+
+no int main() in lex
+rest write lex first
+in declarations include "yy.tab.c" 
+in lex return EOL to return EOL token
+yylval.num stores value usually
+%token<num> NUMBER //type is number
+
+%union{
+	int num;
+	char sym;
+} //types declared..later declare type<num> exp to indicate it is of type num hence a integer
+
+//at the end fo printf("%d",$1} to print accordingly
+
+---------
+
+%{
+	definations
+%}
+%%
+
+%%
+
+int main(){
+	yyparse()
+}
+
+add yyerror also -> 
+yyerror(char * s){
+	printf("%s",s);
+}
+----------------------------------------------------------
+For just lex progs:
+lex progname.l
+cc lex.yy.c -ll 
+./a.out
+
+For lex n yacc: 
+lex progname.l
+yacc -d progname2.y 
+cc lex.yy.c y.tab.c -ll 
+./a.out
+-----------------------------------------------
+
+lEX
+
+[\n] [\t] to indiacte the \t and \ns
+1 -> take care of \t
+2-> take care of thes before %%
+num [0-9]+
+posInt \+?{num}
+negInt -{num}
+posFrac \+?{num}\.{num}?|\+?\.{num}
+negFrac -{num}\.{num}?|-\.{num}
+
+
+
+3->extern FILE *yyin, *yyout;
+fprintf(yyout, "%s", yytext);
+fopen("foo.txt", "r");
+
+4->
+if not matching with | try writing them down seprately one by one
+
+
+
+yaccccccccccprogarms
+
+include "y.tab.h" not yy
+extern int yylex(); 
+int yyerror(char*); //in all rpograms
+1-> just do in nxt line | next line ; 
+S : A 
+   |
+   ;
+  this is to indicate an epislon
+  
+ 2->
+ [0-9]+ {yylval = atoi(yytext); return NUM;}
+ %token NUM
+ missed the F in T and it is (E)
+
+3->
+S : I
+  ;
+
+I : FOR A B   {count++;}
+  ;
+  
+  
+ 4->
+ we want to ignore \n everywhere except tac cuz thats where we will differentiate it
+ 
+
+
+
+
